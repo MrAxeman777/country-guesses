@@ -7,36 +7,32 @@
 
 <body>
 
-    <div class="game">
-        <h1>🌍 Country Guesses</h1>
+<div class="game">
 
-        <h3>Select Difficulty</h3>
+    <h1>🌍 Country Guesses</h1>
 
-        <button onclick="setDifficulty('easy')">🟢 Easy</button>
-        <button onclick="setDifficulty('medium')">🟡 Medium</button>
-        <button onclick="setDifficulty('hard')">🔴 Hard</button>
+    <h3>Select Difficulty</h3>
 
-        <h2 id="difficulty">Easy Mode</h2>
+    <button onclick="setDifficulty('easy')">🟢 Easy</button>
+    <button onclick="setDifficulty('medium')">🟡 Medium</button>
+    <button onclick="setDifficulty('hard')">🔴 Hard</button>
 
-        <p id="clue">Loading clue...</p>
+    <h2 id="difficulty">Easy Mode</h2>
 
-        <input id="answer" placeholder="Enter country name">
+    <p id="clue">Loading clue...</p>
 
-        <button onclick="checkAnswer()">Guess</button>
+    <input id="answer" placeholder="Enter country name">
 
-        <p id="result"></p>
+    <button onclick="checkAnswer()">Guess</button>
 
-        <h3>
-            Score: <span id="score">0</span>
-        </h3>
+    <p id="result"></p>
 
-        <h3>
-            Streak: <span id="streak">0</span>
-        </h3>
+    <h3>Score: <span id="score">0</span></h3>
+    <h3>Streak: <span id="streak">0</span></h3>
 
-    </div>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
