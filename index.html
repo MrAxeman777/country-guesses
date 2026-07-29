@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Country Guesses 🌍</title>
+    <title>🌍 Country Guesses</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
     <div class="game">
         <h1>🌍 Country Guesses</h1>
 
-        <h2 id="clue">Loading...</h2>
+        <h3>Select Difficulty</h3>
+
+        <button onclick="setDifficulty('easy')">🟢 Easy</button>
+        <button onclick="setDifficulty('medium')">🟡 Medium</button>
+        <button onclick="setDifficulty('hard')">🔴 Hard</button>
+
+        <h2 id="difficulty">Easy Mode</h2>
+
+        <p id="clue">Loading clue...</p>
 
         <input id="answer" placeholder="Enter country name">
+
         <button onclick="checkAnswer()">Guess</button>
 
         <p id="result"></p>
 
-        <h3>Score: <span id="score">0</span></h3>
+        <h3>
+            Score: <span id="score">0</span>
+        </h3>
+
+        <h3>
+            Streak: <span id="streak">0</span>
+        </h3>
+
     </div>
 
     <script src="script.js"></script>
+
 </body>
 </html>
