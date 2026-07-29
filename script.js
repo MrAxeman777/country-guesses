@@ -6,26 +6,30 @@ const countries = {
         },
         {
             name: "Brazil",
-            clue: "This South American country is home to the Amazon rainforest and has the largest population in South America."
+            clue: "This South American country is home to the Amazon rainforest and is the largest country in South America."
         },
         {
             name: "Japan",
-            clue: "This island nation in Asia is famous for technology, sushi, and the city of Tokyo."
+            clue: "This island nation in Asia is famous for sushi, technology, and Tokyo."
         },
         {
             name: "Egypt",
             clue: "This African country is home to ancient pyramids and the Nile River."
+        },
+        {
+            name: "Argentina",
+            clue: "This South American country is famous for tango and won the 2022 FIFA World Cup."
         }
     ],
 
     medium: [
         {
             name: "Kazakhstan",
-            clue: "This country is the world's largest landlocked country and is located in Central Asia."
+            clue: "This Central Asian country is the world's largest landlocked country."
         },
         {
             name: "Madagascar",
-            clue: "This island country off Africa is famous for unique wildlife like lemurs."
+            clue: "This island country near Africa is famous for lemurs and unique wildlife."
         },
         {
             name: "Chile",
@@ -33,7 +37,11 @@ const countries = {
         },
         {
             name: "Morocco",
-            clue: "This North African country is known for colorful markets and the Atlas Mountains."
+            clue: "This North African country is known for the Atlas Mountains and colorful markets."
+        },
+        {
+            name: "New Zealand",
+            clue: "This island country near Australia is known for rugby and stunning landscapes."
         }
     ],
 
@@ -44,7 +52,7 @@ const countries = {
         },
         {
             name: "Vanuatu",
-            clue: "This Pacific island country has Port Vila as its capital and is made up of many islands."
+            clue: "This Pacific island nation has Port Vila as its capital and consists of more than 80 islands."
         },
         {
             name: "Liechtenstein",
@@ -57,6 +65,14 @@ const countries = {
         {
             name: "Bhutan",
             clue: "This Himalayan country is known for measuring Gross National Happiness."
+        },
+        {
+            name: "Kiribati",
+            clue: "This Pacific island country is made up of many small islands and has Tarawa as its capital."
+        },
+        {
+            name: "Comoros",
+            clue: "This island nation is located between Madagascar and mainland Africa."
         }
     ]
 };
@@ -88,12 +104,12 @@ function newCountry() {
 }
 
 function checkAnswer() {
-    const answer = document
+    let answer = document
         .getElementById("answer")
         .value
         .trim();
 
-    const result = document.getElementById("result");
+    let result = document.getElementById("result");
 
     if (answer.toLowerCase() === currentCountry.name.toLowerCase()) {
 
@@ -105,25 +121,34 @@ function checkAnswer() {
     } else {
 
         streak = 0;
-        result.textContent = "❌ Incorrect!";
+
+        result.textContent = "❌ Wrong! Try again.";
 
     }
 
     document.getElementById("score").textContent = score;
+    document.getElementById("streak").textContent = streak;
 
-    setTimeout(() => {
-        result.textContent = "";
-        newCountry();
-    }, 1500);
+    if (answer.toLowerCase() === currentCountry.name.toLowerCase()) {
+        setTimeout(() => {
+            result.textContent = "";
+            newCountry();
+        }, 1200);
+    }
 }
 
 function setDifficulty(level) {
+
     difficulty = level;
     usedCountries = [];
+
     score = 0;
     streak = 0;
 
     document.getElementById("score").textContent = score;
+    document.getElementById("streak").textContent = streak;
+    document.getElementById("difficulty").textContent =
+        level.charAt(0).toUpperCase() + level.slice(1) + " Mode";
 
     newCountry();
 }
