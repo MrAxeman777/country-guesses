@@ -2,46 +2,46 @@ const countries = {
     easy: [
         {
             name: "France",
-            clue: "This European country is famous for a tower in Paris and is known for fashion and cuisine."
+            clue: "This European country has Paris as its capital and is famous for fashion and cuisine."
         },
         {
             name: "Brazil",
-            clue: "This South American country is home to the Amazon rainforest and is the largest country in South America."
+            clue: "This South American country contains much of the Amazon rainforest."
         },
         {
             name: "Japan",
-            clue: "This island nation in Asia is famous for sushi, technology, and Tokyo."
+            clue: "This Asian island country has Tokyo as its capital."
         },
         {
             name: "Egypt",
-            clue: "This African country is home to ancient pyramids and the Nile River."
+            clue: "This African country is home to ancient pyramids."
         },
         {
-            name: "Argentina",
-            clue: "This South American country is famous for tango and won the 2022 FIFA World Cup."
+            name: "Italy",
+            clue: "This European country is shaped like a boot and has Rome as its capital."
         }
     ],
 
     medium: [
         {
             name: "Kazakhstan",
-            clue: "This Central Asian country is the world's largest landlocked country."
+            clue: "This Central Asian country is the largest landlocked country in the world."
         },
         {
             name: "Madagascar",
-            clue: "This island country near Africa is famous for lemurs and unique wildlife."
+            clue: "This island country near Africa is famous for lemurs."
         },
         {
             name: "Chile",
-            clue: "This long, narrow country stretches along the western side of South America."
+            clue: "This long narrow country stretches along South America's western coast."
         },
         {
             name: "Morocco",
-            clue: "This North African country is known for the Atlas Mountains and colorful markets."
+            clue: "This North African country is known for the Atlas Mountains."
         },
         {
-            name: "New Zealand",
-            clue: "This island country near Australia is known for rugby and stunning landscapes."
+            name: "Uzbekistan",
+            clue: "This Central Asian country was part of the Silk Road and has Tashkent as its capital."
         }
     ],
 
@@ -52,7 +52,7 @@ const countries = {
         },
         {
             name: "Vanuatu",
-            clue: "This Pacific island nation has Port Vila as its capital and consists of more than 80 islands."
+            clue: "This Pacific island country has Port Vila as its capital and is made up of many islands."
         },
         {
             name: "Liechtenstein",
@@ -60,22 +60,23 @@ const countries = {
         },
         {
             name: "Lesotho",
-            clue: "This African country is completely surrounded by another country and has Maseru as its capital."
-        },
-        {
-            name: "Bhutan",
-            clue: "This Himalayan country is known for measuring Gross National Happiness."
+            clue: "This African country is completely surrounded by South Africa."
         },
         {
             name: "Kiribati",
-            clue: "This Pacific island country is made up of many small islands and has Tarawa as its capital."
+            clue: "This Pacific island country has Tarawa as its capital."
         },
         {
             name: "Comoros",
             clue: "This island nation is located between Madagascar and mainland Africa."
+        },
+        {
+            name: "Palau",
+            clue: "This Pacific island country is famous for its marine biodiversity and has Ngerulmud as its capital."
         }
     ]
 };
+
 
 let difficulty = "easy";
 let currentCountry;
@@ -83,33 +84,48 @@ let score = 0;
 let streak = 0;
 let usedCountries = [];
 
+
 function newCountry() {
+
     let list = countries[difficulty];
 
     let available = list.filter(
         country => !usedCountries.includes(country.name)
     );
 
+
     if (available.length === 0) {
         usedCountries = [];
         available = list;
     }
 
-    currentCountry = available[Math.floor(Math.random() * available.length)];
+
+    currentCountry =
+        available[Math.floor(Math.random() * available.length)];
+
 
     usedCountries.push(currentCountry.name);
 
-    document.getElementById("clue").textContent = currentCountry.clue;
+
+    document.getElementById("clue").textContent =
+        currentCountry.clue;
+
     document.getElementById("answer").value = "";
+
 }
 
+
+
 function checkAnswer() {
+
     let answer = document
         .getElementById("answer")
         .value
         .trim();
 
+
     let result = document.getElementById("result");
+
 
     if (answer.toLowerCase() === currentCountry.name.toLowerCase()) {
 
@@ -118,39 +134,49 @@ function checkAnswer() {
 
         result.textContent = "✅ Correct!";
 
+        setTimeout(() => {
+            result.textContent = "";
+            newCountry();
+        }, 1000);
+
+
     } else {
 
         streak = 0;
-
-        result.textContent = "❌ Wrong! Try again.";
+        result.textContent = "❌ Incorrect! Try again.";
 
     }
+
 
     document.getElementById("score").textContent = score;
     document.getElementById("streak").textContent = streak;
 
-    if (answer.toLowerCase() === currentCountry.name.toLowerCase()) {
-        setTimeout(() => {
-            result.textContent = "";
-            newCountry();
-        }, 1200);
-    }
 }
+
+
 
 function setDifficulty(level) {
 
     difficulty = level;
+
     usedCountries = [];
 
     score = 0;
     streak = 0;
 
+
+    document.getElementById("difficulty").textContent =
+        level.toUpperCase() + " MODE";
+
+
     document.getElementById("score").textContent = score;
     document.getElementById("streak").textContent = streak;
-    document.getElementById("difficulty").textContent =
-        level.charAt(0).toUpperCase() + level.slice(1) + " Mode";
+
 
     newCountry();
+
 }
+
+
 
 newCountry();
